@@ -2,10 +2,10 @@ const express = require('express');
 const {createProxyMiddleware} = require("http-proxy-middleware")
 const cors = require('cors');
 const app = express();
-require('dotenv').config();
+// require('dotenv').config();
 const PORT = process.env.PORT || 3400;
-
-app.set('trust proxy', 1)
+app.use(express.json());
+// app.set('trust proxy', 1)
 app.use(cors());
 
 app.use((req, res, next) => {
