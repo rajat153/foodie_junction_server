@@ -4,8 +4,7 @@ const cors = require('cors');
 const app = express();
 const PORT = process.env.PORT || 3400;
 app.use(express.json());
-app.use(cors());
-
+app.use(cors({ origin: "*" }));
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
@@ -25,6 +24,10 @@ app.use(
       changeOrigin: true,
       pathRewrite: {
         "^/api/proxy/swiggy/dapi": "/dapi",
+      },
+      onProxyRes: (proxyRes, req, res) => {
+        // ✅ Modify CORS headers in response
+        proxyRes.headers["Access-Control-Allow-Origin"] = "*"; 
       },
     })
 );
