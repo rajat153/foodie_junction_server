@@ -2,10 +2,8 @@ const express = require('express');
 const {createProxyMiddleware} = require("http-proxy-middleware")
 const cors = require('cors');
 const app = express();
-// require('dotenv').config();
 const PORT = process.env.PORT || 3400;
 app.use(express.json());
-// app.set('trust proxy', 1)
 app.use(cors());
 
 app.use((req, res, next) => {
@@ -16,7 +14,9 @@ app.use((req, res, next) => {
 });
   
 // app.use('/api', require('./routes'))
-
+app.get("/", (req,res) => {
+    res.send("<h1>Welcome to the Food Delivery App</h1>")
+})
 
 app.use(
     "/api/proxy/swiggy/dapi",
