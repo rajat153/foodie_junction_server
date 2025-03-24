@@ -9,6 +9,15 @@ app.use('/api', require('./routes'))
 app.use(cors());
 
 
+app.get('/home' , (req, res)=>{
+    try{
+      res.send("<h1>Welcone HIII</h1>")
+    }catch(err){
+        res.status(402).res.send("WRONG")
+    }
+})
+
+
 
 
 
