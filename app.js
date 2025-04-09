@@ -6,6 +6,10 @@ const PORT = 3000;
 
 app.use(cors());
 
+app.get("/", (req,res) => {
+  res.send("<h1>Welcome to the foodie junction</h1>")
+})
+
 app.get("/api/swiggy/restaurants", async (req, res) => {
   const { lat, lng } = req.query;
 
