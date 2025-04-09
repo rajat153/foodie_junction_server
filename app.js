@@ -1,8 +1,10 @@
-// swiggy-api.js
-const express = require("express");
 
+const express = require("express");
+const cors = require("cors"); // ✅ import CORS
 const app = express();
 const PORT = 3000;
+
+app.use(cors());
 
 app.get("/api/swiggy/restaurants", async (req, res) => {
   const { lat, lng } = req.query;
