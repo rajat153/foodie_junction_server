@@ -94,6 +94,39 @@ app.get("/api/tmdbpopularmovies", async (req, res) => {
   }
 });
 
+app.get("/api/tmdbtopratedmovies", async (req, res) => {
+  const url = `https://thingproxy.freeboard.io/fetch/https://api.themoviedb.org/3/movie/top_rated?api_key=${TMDB_API_CONSTANT}&language=en-US&page=1`;
+  try {
+    const response = await fetch(url, {
+      headers: {
+        "User-Agent": "Mozilla/5.0"
+      }
+    });
+    const data = await response.text();
+    res.send(data);
+  } catch (error) {
+    console.error("Error fetching popular movies:", error);
+    res.status(500).json({ error: "Failed to fetch popular movies" });
+  }
+});
+
+app.get("/api/tmdbupcomingmovies", async (req, res) => {
+  const url = `https://thingproxy.freeboard.io/fetch/https://api.themoviedb.org/3/movie/upcoming?api_key=${TMDB_API_CONSTANT}&language=en-US&page=1`;
+  try {
+    const response = await fetch(url, {
+      headers: {
+        "User-Agent": "Mozilla/5.0"
+      }
+    });
+    const data = await response.text();
+    res.send(data);
+  } catch (error) {
+    console.error("Error fetching popular movies:", error);
+    res.status(500).json({ error: "Failed to fetch popular movies" });
+  }
+});
+
+
 app.post("/api/tmdbsearchmovies", async (req, res) => {
   const {movie} = req.query;
   const url = `https://thingproxy.freeboard.io/fetch/https://api.themoviedb.org/3/search/movie?query=${movie}&include_adult=false&language=en-US&page=1&api_key=${TMDB_API_CONSTANT}`;
